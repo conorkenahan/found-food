@@ -10,7 +10,7 @@ export default class RecipeResults extends React.Component {
   render() {
     return (
       <section className="recipeResults">
-        <p>You can make these recipes!</p>
+        <p>Hooray! You can make these recipes!</p>
         <div>
           {this.context.recipes.map((recipe, i) => (
             <Recipe key={i} recipe={recipe} {...this.context} />

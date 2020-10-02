@@ -9,7 +9,6 @@ export default class Ingredients extends React.Component {
       <div>
         <h3>Have limited ingredients in your kitchen? No problem!</h3>
         <p>Select what you have on hand, and we'll find recipes that match!</p>
-        <p>Ingredients:</p>
         <form
           className="ingredientsForm"
           onSubmit={(e) => {

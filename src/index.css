@@ -14,12 +14,17 @@ code {
     monospace;
 }
 
+hr {
+  border: 1px solid gray;
+  width: 80%;
+}
+
 .ingredientsList {
-  height: 400px;
-  width: 900px;
   display: flex;
   flex-wrap: wrap;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
 
 .ingredient {
@@ -29,6 +34,7 @@ code {
   border-radius: 0.4rem;
   display: flex;
   width: 100px;
+  height: 30px;
   cursor: pointer;
   margin: 2px;
   text-align: left;
@@ -38,23 +44,20 @@ code {
   border: 3px solid #4939ff;
 }
 
-.recipeResults {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .recipeResultsList {
-  align-self: center;
-  text-align: left;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  list-style-position: inside;
+  text-align: left;
 }
 
 .recipe {
-  cursor: pointer;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  border-bottom: black;
+  border-bottom-width: 10px;
 }
 
 .hidden {
@@ -75,9 +78,11 @@ code {
   text-align: center;
 }
 
-.submitIngredients {
+.submitIngredients,
+.submitSignup,
+.submitLogin {
   padding: 3px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .tryAgainButton {
@@ -87,4 +92,15 @@ code {
 .recipeImage {
   height: 200px;
   align-self: center;
+  cursor: pointer;
+}
+
+.signupForm,
+.loginForm {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }

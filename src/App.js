@@ -3,6 +3,8 @@ import "./index.css";
 import Context from "./Context";
 import Ingredients from "./components/Ingredients/Ingredients.js";
 import RecipeResults from "./components/RecipeResults/RecipeResults.js";
+import Signup from "./components/Signup/Signup.js";
+import Login from "./components/Login/Login.js";
 import Nav from "./components/Nav/Nav.js";
 import { Route } from "react-router-dom";
 
@@ -30,7 +32,6 @@ export default class App extends React.Component {
       { value: "ketchup", label: "Ketchup", checked: false },
       { value: "lemons", label: "Lemons", checked: false },
       { value: "mayonnaise", label: "Mayonnaise", checked: false },
-      { value: "milk", label: "Milk", checked: false },
       { value: "mushrooms", label: "Mushrooms", checked: false },
       { value: "mustard", label: "Mustard", checked: false },
       { value: "onions", label: "Onions", checked: false },
@@ -45,8 +46,6 @@ export default class App extends React.Component {
       { value: "tomatoes", label: "Tomatoes", checked: false },
       { value: "tomato sauce", label: "Tomato Sauce", checked: false },
       { value: "tortillas", label: "Tortillas", checked: false },
-      { value: "taco shells", label: "Taco Shells", checked: false },
-      { value: "vinegar", label: "Vinegar", checked: false },
       { value: "zucchini", label: "Zucchini", checked: false },
     ],
     selectedIngredients: [],
@@ -110,6 +109,7 @@ export default class App extends React.Component {
         imgAlt: "baked eggs in avocado",
       },
     ],
+    user: [],
 
     formSubmit: (e) => {
       e.preventDefault();
@@ -120,6 +120,8 @@ export default class App extends React.Component {
       ingredients[index].checked = !ingredients[index].checked;
       this.setState({ ingredients });
     },
+
+    newUser: (newUser) => this.setState({ user: newUser }),
 
     // resetCheckedValues: () => {
     //   let ingredients = this.state.ingredients.map((ingredient, i) => {
@@ -136,6 +138,8 @@ export default class App extends React.Component {
           <Route path="/" component={Nav} />
           <Route exact path="/" component={Ingredients} />
           <Route path="/results" component={RecipeResults} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
         </div>
       </Context.Provider>
     );
