@@ -1,13 +1,90 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  background-color: lightblue;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.ingredientsList {
+  height: 400px;
+  width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.ingredient {
+  display: block;
+  padding: 0.8rem;
+  border: 2px solid rgb(131, 131, 131);
+  border-radius: 0.4rem;
+  display: flex;
+  width: 100px;
+  cursor: pointer;
+  margin: 2px;
+  text-align: left;
+}
+
+.ingredient__checked_true {
+  border: 3px solid #4939ff;
+}
+
+.recipeResults {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.recipeResultsList {
+  align-self: center;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.recipe {
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.navLink {
+  margin: 20px;
+}
+
+.mainLogo {
+  text-align: center;
+}
+
+.submitIngredients {
+  padding: 3px;
+  margin-top: 30px;
+}
+
+.tryAgainButton {
+  margin-bottom: 50px;
+}
+
+.recipeImage {
+  height: 200px;
+  align-self: center;
 }
