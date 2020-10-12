@@ -37,7 +37,7 @@ const RecipeApiService = {
       !res.ok ? res.json("true").then((e) => Promise.reject(e)) : res.json()
     );
   },
-  deleteRecipe(recipeId) {
+  deleteRecipe(recipeId, username) {
     return fetch(`${config.API_ENDPOINT}/recipes`, {
       method: "DELETE",
       headers: {
@@ -46,6 +46,7 @@ const RecipeApiService = {
       },
       body: JSON.stringify({
         recipeid: recipeId,
+        username: username,
       }),
     }).then((res) => (!res.ok ? Promise.reject(res) : res.json()));
   },

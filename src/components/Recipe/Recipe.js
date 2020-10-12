@@ -12,6 +12,7 @@ export default class Recipe extends React.Component {
     recipeSaved: false,
   };
 
+  // need to move into context
   saveRecipe = (e) => {
     e.preventDefault();
     const { recipe } = this.props;
@@ -34,18 +35,6 @@ export default class Recipe extends React.Component {
       });
   };
 
-  deleteRecipe = (e) => {
-    e.preventDefault();
-    const { recipe } = this.props;
-    RecipeApiService.deleteRecipe(recipe.id)
-      .then((res) => {
-        this.setState({ recipeSaved: res });
-      })
-      .catch((res) => {
-        this.setState({ error: res.error });
-      });
-  };
-
   render() {
     const { recipe } = this.props;
     const recipeInfo = this.props.recipeInfo[this.props.id];
@@ -61,7 +50,10 @@ export default class Recipe extends React.Component {
 
         {this.state.recipeSaved ? (
           <div className="unsave">
-            <form className="saveRecipe" onSubmit={this.deleteRecipe}>
+            <form
+              className="saveRecipe"
+              onSubmit={(e) => this.context.deleteSavedRecipe(recipe, e)}
+            >
               <button>Unsave</button>
             </form>
             <img className="savedStar icon" src={star} alt="recipe saved" />

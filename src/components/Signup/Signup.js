@@ -13,9 +13,6 @@ export default class Signup extends React.Component {
     e.preventDefault();
     const { name, password, username, email } = e.target;
 
-    console.log("registration form submitted");
-    console.log({ name, password, username, email });
-
     this.setState({ error: null });
     AuthApiService.postUser({
       name: name.value,

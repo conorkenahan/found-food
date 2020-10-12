@@ -3,9 +3,6 @@ import Context from "../../Context";
 
 export default class Recipe extends React.Component {
   static contextType = Context;
-  state = {
-    recipeSaved: false,
-  };
 
   render() {
     const { recipe } = this.props;

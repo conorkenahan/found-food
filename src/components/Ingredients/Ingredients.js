@@ -14,6 +14,7 @@ export default class Ingredients extends React.Component {
           onSubmit={(e) => {
             this.context.formSubmit(e);
             this.props.history.push("/results");
+            this.context.setToLoading();
           }}
         >
           <ul className="ingredientsList">
