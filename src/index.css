@@ -44,7 +44,8 @@ hr {
   border: 3px solid #4939ff;
 }
 
-.recipeResultsList {
+.recipeResultsList,
+.missingIngredientsList {
   width: 400px;
   margin-left: auto;
   margin-right: auto;
@@ -56,8 +57,8 @@ hr {
 
 .recipe {
   margin-bottom: 30px;
-  border-bottom: black;
-  border-bottom-width: 10px;
+  border-bottom: 2px solid grey;
+  border-width: 80%;
 }
 
 .hidden {
@@ -86,7 +87,8 @@ hr {
   margin-bottom: 20px;
 }
 
-.tryAgainButton {
+.tryAgainButton,
+.searchMoreButton {
   margin-bottom: 50px;
 }
 
@@ -97,11 +99,28 @@ hr {
 }
 
 .signupForm,
-.loginForm {
+.LoginForm {
   display: flex;
   text-align: left;
   flex-direction: column;
   width: 200px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.icon {
+  width: 70px;
+}
+
+.savedStar {
+  width: 30px;
+}
+
+.loginReminder {
+  color: rgb(91, 91, 91);
+}
+
+.recipeTitle {
+  font-size: large;
+  font-style: bold;
 }

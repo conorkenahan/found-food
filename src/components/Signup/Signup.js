@@ -1,69 +1,73 @@
 import React from "react";
-import Context from "../../Context";
+import AuthApiService from "../../services/auth-api-service";
 
 export default class Signup extends React.Component {
-  state = {
-    name: "",
-    username: "",
-    password: "",
-    email: "",
+  static defaultProps = {
+    onRegistrationSuccess: () => {},
   };
-  static contextType = Context;
+  state = {
+    error: null,
+  };
 
-  newUser(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
-    this.context.newUser(JSON.stringify(this.state));
-    console.log(this.state);
-  }
+    const { name, password, username, email } = e.target;
+
+    console.log("registration form submitted");
+    console.log({ name, password, username, email });
+
+    this.setState({ error: null });
+    AuthApiService.postUser({
+      name: name.value,
+      password: password.value,
+      username: username.value,
+      email: email.value,
+    })
+      .then((user) => {
+        name.value = "";
+        password.value = "";
+        username.value = "";
+        email.value = "";
+        this.props.onRegistrationSuccess();
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
+  };
 
   render() {
+    const { error } = this.state;
     return (
-      <div className="signUp">
-        <h3>Sign up to save recipes!</h3>
-        <form
-          className="signupForm"
-          onSubmit={(e) => {
-            this.newUser(e);
-          }}
-        >
-          Name:
+      <form className="signupForm" onSubmit={this.handleSubmit}>
+        <div role="alert">{error && <p className="red">{error}</p>}</div>
+        <div className="full_name">
+          <label htmlFor="signupForm__full_name">Name</label>
+          <input type="text" name="name" id="signupName" required></input>
+        </div>
+        <div className="user_name">
+          <label htmlFor="signupForm__user_name">Username</label>
           <input
             type="text"
-            name="signupName"
-            id="signupName"
-            value={this.state.name}
-            placeholder="Brendan Fraser"
-            onChange={(e) => this.setState({ name: e.target.value })}
-          ></input>
-          Username:
-          <input
-            type="text"
-            name="signupUsername"
+            name="username"
             id="signupUsername"
-            value={this.state.username}
-            placeholder="whoadude420"
-            onChange={(e) => this.setState({ username: e.target.value })}
+            required
           ></input>
-          Password:
+        </div>
+        <div className="password">
+          <label htmlFor="signupForm__password">Password</label>
           <input
             type="password"
-            name="signupPassword"
+            name="password"
             id="signupPassword"
-            value={this.state.password}
-            onChange={(e) => this.setState({ password: e.target.value })}
+            required
           ></input>
-          Email:
-          <input
-            type="email"
-            name="signupEmail"
-            id="signupEmail"
-            value={this.state.email}
-            placeholder="bfras69@hotmail.gov"
-            onChange={(e) => this.setState({ email: e.target.value })}
-          ></input>
-          <button className="submitSignup">Submit</button>
-        </form>
-      </div>
+        </div>
+        <div className="email">
+          <label htmlFor="signupForm__nick_name">Email</label>
+          <input type="email" name="email" id="signupEmail" required></input>
+        </div>
+        <button className="submitSignup">Submit</button>{" "}
+      </form>
     );
   }
 }

@@ -1,12 +1,16 @@
 import React from "react";
 import "./index.css";
 import Context from "./Context";
+import { Route } from "react-router-dom";
+import config from "./config";
 import Ingredients from "./components/Ingredients/Ingredients.js";
 import RecipeResults from "./components/RecipeResults/RecipeResults.js";
-import Signup from "./components/Signup/Signup.js";
-import Login from "./components/Login/Login.js";
+import Signup from "./components/SignUp/SignUp.js";
+import LoginPage from "./components/Login/LoginPage";
 import Nav from "./components/Nav/Nav.js";
-import { Route } from "react-router-dom";
+import RegistrationPage from "./routes/RegistrationPage/RegistrationPage";
+import MyRecipes from "./components/MyRecipes/MyRecipes";
+import RecipeApiService from "./services/recipe-api-service";
 
 export default class App extends React.Component {
   state = {
@@ -49,70 +53,22 @@ export default class App extends React.Component {
       { value: "zucchini", label: "Zucchini", checked: false },
     ],
     selectedIngredients: [],
-    recipes: [
-      {
-        title: "Roasted Garlic Parmesan Cauliflower",
-        description:
-          "Crispy cauliflower bites with garlic Parmesan breading, baked in the oven instead of fried. So tasty!",
-        ingredients: [
-          "1/2 cup butter melted",
-          "2 garlic cloves minced",
-          "1 cup Italian or plain breadcrumbs",
-          "1/2 cup grated Parmesan cheese",
-          "1/4 tsp salt",
-          "1/4 tsp black pepper",
-          "1 medium cauliflower head",
-        ],
-        url:
-          "https://www.crunchycreamysweet.com/roasted-garlic-parmesan-cauliflower/",
-        imgSrc: "cauliflower.jpg",
-        imgAlt: "cauliflower",
-      },
-      {
-        title: "The Perfect Baked Potato",
-        description:
-          "Learn how to make the perfect baked potato using this step-by-step tutorial and recipe. So easy and delicious!",
-        ingredients: [
-          "1 medium-to-large Russet potato, scrubbed clean of any dirt",
-          "1–2 teaspoons melted butter (or olive oil)",
-          "pinch of coarse Kosher salt",
-          "pinch of freshly-cracked black pepper",
-        ],
-        url: `https://www.gimmesomeoven.com/baked-potato/`,
-        imgSrc: "bakedpotato.jpg",
-        imgAlt: "baked potato",
-      },
-      {
-        title: "Bacon Avocado Fries",
-        description: "You can't say no to anything wrapped in bacon.",
-        ingredients: [
-          "3 avocados",
-          "24 thin strips of bacon",
-          "1/4 c. ranch dressing, for serving",
-        ],
-        url:
-          "https://www.delish.com/cooking/recipe-ideas/recipes/a48261/bacon-avocado-fries-recipe/",
-        imgSrc: "avocadobacon.jpg",
-        imgAlt: "bacon avocado fries",
-      },
-      {
-        title: "Baked Eggs in Avocado",
-        description:
-          "Who would have thought? You can bake your eggs right in avocado halves for a healthy breakfast option to start your day off right!",
-        ingredients: [
-          "3 avocados, halved and seeded",
-          "6 large eggs",
-          "Kosher salt and freshly ground black pepper, to taste",
-        ],
-        url: "https://damndelicious.net/2016/10/05/baked-eggs-in-avocado/",
-        imgSrc: "avocadoeggs.jpg",
-        imgAlt: "baked eggs in avocado",
-      },
-    ],
+    recipes: [],
+    recipeInfo: [],
     user: [],
+    username: "",
+    userRecipes: {},
 
     formSubmit: (e) => {
       e.preventDefault();
+    },
+
+    getUsername: (username) => {
+      this.setState({ username: username.value });
+    },
+
+    clearUsername: () => {
+      this.setState({ username: "" });
     },
 
     toggleChecked: (index) => {
@@ -123,11 +79,86 @@ export default class App extends React.Component {
 
     newUser: (newUser) => this.setState({ user: newUser }),
 
-    // resetCheckedValues: () => {
-    //   let ingredients = this.state.ingredients.map((ingredient, i) => {
-    //     return ingredient.checked === false;
-    //   });
-    //   this.setState({ ingredients });
+    getRecipes: (selectedIngredients) => {
+      fetch(
+        config.RECIPES_API_ENDPOINT +
+          "apiKey=" +
+          process.env.REACT_APP_RECIPE_API_KEY +
+          "&ingredients=" +
+          selectedIngredients +
+          "&ranking=2" +
+          "&number=3"
+        // ^ REMOVE THIS before releasing
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          const recipes = res;
+          return fetch(
+            config.RECIPE_INFO_API_ENDPOINT +
+              "/informationBulk?apiKey=" +
+              process.env.REACT_APP_RECIPE_API_KEY +
+              "&ids=" +
+              recipes.map((r) => r.id).join(",")
+          )
+            .then((res) => res.json())
+            .then((res) =>
+              this.setState({ recipeInfo: res, recipes: recipes })
+            );
+        });
+    },
+
+    saveRecipe: (recipe, e, id) => {
+      e.preventDefault();
+      const recipeInfo = this.props.recipeInfo[id];
+      RecipeApiService.saveRecipe(
+        recipe.id,
+        recipe.title,
+        recipe.image,
+        recipeInfo.sourceUrl,
+        this.state.username
+      )
+        .then((res) => {
+          this.setState({ recipeSaved: res });
+        })
+        .catch((res) => {
+          this.setState({ error: res.error });
+        });
+    },
+
+    getRecipesByUserId: (username) => {
+      RecipeApiService.getUserRecipes(username).then((res) =>
+        this.setState({ userRecipes: res })
+      );
+    },
+
+    deleteSavedRecipe: (recipe, e) => {
+      e.preventDefault();
+      RecipeApiService.deleteRecipe(recipe.id)
+        .then((res) => {
+          this.setState({ recipeSaved: res });
+        })
+        .then(
+          this.setState({
+            userRecipes: this.state.userRecipes.filter(
+              (r) => r.id !== recipe.id
+            ),
+          })
+        )
+        .catch((res) => {
+          this.setState({ error: res.error });
+        });
+    },
+
+    // deleteRecipe: (e) => {
+    //   e.preventDefault();
+    //   const { recipe } = this.props;
+    //   RecipeApiService.deleteRecipe(recipe.id)
+    //     .then((res) => {
+    //       this.setState({ recipeSaved: res });
+    //     })
+    //     .catch((res) => {
+    //       this.setState({ error: res.error });
+    //     });
     // },
   };
 
@@ -139,7 +170,9 @@ export default class App extends React.Component {
           <Route exact path="/" component={Ingredients} />
           <Route path="/results" component={RecipeResults} />
           <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegistrationPage} />
+          <Route path="/recipes/:username" component={MyRecipes} />
         </div>
       </Context.Provider>
     );

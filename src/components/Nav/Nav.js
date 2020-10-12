@@ -1,9 +1,41 @@
 import React from "react";
 import Context from "../../Context";
 import { Link } from "react-router-dom";
+import TokenService from "../../services/token-service";
 
 export default class Nav extends React.Component {
   static contextType = Context;
+
+  handleLogoutClick = () => {
+    TokenService.clearAuthToken();
+    this.context.clearUsername();
+  };
+
+  renderLogoutLink() {
+    return (
+      <div className=" loggedIn">
+        <Link className="authLink" to={`/recipes/${this.context.username}`}>
+          My Recipes
+        </Link>
+        {" - "}
+        <Link className="authLink" onClick={this.handleLogoutClick} to="/">
+          Logout
+        </Link>
+      </div>
+    );
+  }
+  renderLoginLink() {
+    return (
+      <div className="auhLink loggedOut">
+        <Link className="authLink" to="/register">
+          Register
+        </Link>
+        {" - "}
+        <Link to="/login">Log in</Link>
+      </div>
+    );
+  }
+
   render() {
     return (
       <>
@@ -13,12 +45,9 @@ export default class Nav extends React.Component {
           </h1>
         </header>
         <section className="nav">
-          <h3 className="navLink">
-            <Link to="/signup">Sign Up</Link>
-          </h3>
-          <h3 className="navLink">
-            <Link to="/login">Login</Link>
-          </h3>
+          {TokenService.hasAuthToken()
+            ? this.renderLogoutLink()
+            : this.renderLoginLink()}
         </section>
       </>
     );
