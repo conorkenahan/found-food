@@ -42,7 +42,12 @@ export default class Recipe extends React.Component {
 
     return (
       <div className="recipe" key={this.props.i}>
-        <a href={recipeInfo.sourceUrl} className="recipeTitle">
+        <a
+          href={recipeInfo.sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="recipeTitle"
+        >
           {recipe.title}
         </a>
         <p>{recipe.description}</p>
