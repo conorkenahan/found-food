@@ -5,6 +5,7 @@ import glutenfree from "../../images/icons/glutenfree.png";
 import dairyfree from "../../images/icons/dairyfree.png";
 import vegan from "../../images/icons/vegan.png";
 import star from "../../images/icons/star.png";
+import TokenService from "../../services/token-service";
 
 export default class Recipe extends React.Component {
   static contextType = Context;
@@ -46,24 +47,36 @@ export default class Recipe extends React.Component {
         </a>
         <p>{recipe.description}</p>
         <img className="recipeImage" src={recipe.image} alt={recipe.title} />
-        <p>Save recipe:</p>
 
-        {this.state.recipeSaved ? (
-          <div className="unsave">
-            <form
-              className="saveRecipe"
-              onSubmit={(e) => this.context.deleteSavedRecipe(recipe, e)}
-            >
-              <button>Unsave</button>
-            </form>
-            <img className="savedStar icon" src={star} alt="recipe saved" />
-          </div>
+        {TokenService.hasAuthToken() ? (
+          <>
+            {this.state.recipeSaved ? (
+              <>
+                <p>Save recipe:</p>
+                <div className="unsave">
+                  <form
+                    className="saveRecipe"
+                    onSubmit={(e) => this.context.deleteSavedRecipe(recipe, e)}
+                  >
+                    <button>Unsave</button>
+                  </form>
+                  <img
+                    className="savedStar icon"
+                    src={star}
+                    alt="recipe saved"
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="save">
+                <form className="saveRecipe" onSubmit={this.saveRecipe}>
+                  <button>Save</button>
+                </form>
+              </div>
+            )}
+          </>
         ) : (
-          <div className="save">
-            <form className="saveRecipe" onSubmit={this.saveRecipe}>
-              <button>Save</button>
-            </form>
-          </div>
+          <></>
         )}
 
         {/* <a href={recipe.url}>Link to Recipe</a> */}
