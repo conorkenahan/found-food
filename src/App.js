@@ -58,10 +58,13 @@ export default class App extends React.Component {
     user: [],
     username: "",
     userRecipes: {},
-    loading: true,
+    loading: false,
 
-    setToLoading: () => {
+    setLoadingToTrue: () => {
       this.setState({ loading: true });
+    },
+    setLoadingToFalse: () => {
+      this.setState({ loading: false });
     },
 
     getUsername: (username) => {

@@ -115,10 +115,11 @@ hr {
   font-weight: 200;
 }
 
-.navLink {
+.navLink,
+.authLink {
   font-family: Staatliches, "Courier New", Courier, monospace;
   margin: 20px;
-  font-size: 25px;
+  font-size: 20px;
   color: #004a7b;
 }
 
@@ -249,18 +250,18 @@ hr {
 @media only screen and (max-width: 600px) {
   body {
     display: flex;
+    flex-direction: column;
   }
 
   .ingredientsList {
-    width: auto;
     display: flex;
     flex-wrap: wrap;
-    height: auto;
     width: auto;
   }
+
   .ingredient {
-    margin: 10px;
     height: 100%;
+    margin-bottom: 5px;
   }
   .ingredientContainer {
     width: auto;

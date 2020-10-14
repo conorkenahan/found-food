@@ -10,6 +10,7 @@ export default class Login extends Component {
 
   handleSubmitJwtAuth = (e) => {
     e.preventDefault();
+    this.context.setLoadingToTrue();
     this.setState({ error: null });
     const { username, password } = e.target;
     this.context.getUsername(username);
@@ -31,25 +32,33 @@ export default class Login extends Component {
   render() {
     const { error } = this.state;
     return (
-      <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
-        <div role="alert">{error && <p className="red">{error}</p>}</div>
-        <div className="username">
-          <label htmlFor="LoginForm__username">User name</label>
-          <input required name="username" id="LoginForm__username"></input>
-        </div>
-        <div className="password">
-          <label htmlFor="LoginForm__password">Password</label>
-          <input
-            required
-            name="password"
-            type="password"
-            id="LoginForm__password"
-          ></input>
-        </div>
-        <button className="submitLogin" type="submit">
-          Login
-        </button>
-      </form>
+      <>
+        {this.context.loading ? (
+          <>
+            <div className="loader"></div>
+          </>
+        ) : (
+          <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
+            <div role="alert">{error && <p className="red">{error}</p>}</div>
+            <div className="username">
+              <label htmlFor="LoginForm__username">User name</label>
+              <input required name="username" id="LoginForm__username"></input>
+            </div>
+            <div className="password">
+              <label htmlFor="LoginForm__password">Password</label>
+              <input
+                required
+                name="password"
+                type="password"
+                id="LoginForm__password"
+              ></input>
+            </div>
+            <button className="submitLogin" type="submit">
+              Login
+            </button>
+          </form>
+        )}
+      </>
     );
   }
 }
