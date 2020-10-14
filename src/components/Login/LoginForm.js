@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import TokenService from "../../services/token-service";
 import AuthApiService from "../../services/auth-api-service";
 import Context from "../../Context";
 
@@ -20,11 +19,12 @@ export default class Login extends Component {
       password: password.value,
     })
       .then((res) => {
-        TokenService.saveAuthToken(res.authToken);
         this.props.onLoginSuccess(username.value);
         this.context.getRecipesByUserId(username.value);
+        this.context.setLoadingToFalse();
       })
       .catch((res) => {
+        this.context.setLoadingToFalse();
         this.setState({ error: res.error });
       });
   };

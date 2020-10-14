@@ -126,10 +126,14 @@ hr {
   text-align: center;
 }
 
+/* buttons */
 .submitIngredients,
 .submitSignup,
 .submitLogin,
-.tryAgainButton {
+.tryAgainButton,
+.searchMoreButton,
+.unsaveButton,
+.saveButton {
   display: inline-block;
   padding: 0.35em 1.2em;
   border: 0.1em solid #a9a9a9;
@@ -145,23 +149,27 @@ hr {
   margin-top: 10px;
   margin-bottom: 30px;
 }
-.submitIngredients {
+
+.submitIngredients,
+.searchAgainButton {
   width: 150px;
   height: 50px;
   font-size: 20px;
 }
 
+.searchMoreButton {
+  margin: 0px;
+}
+
 .submitIngredients:hover,
 .submitSignup:hover,
 .submitLogin:hover,
-.tryAgainButton:hover {
+.searchAgainButton:hover,
+.searchMoreButton:hover,
+.unsaveButton:hover,
+.saveButton:hover {
   color: white;
   background-color: gray;
-}
-
-.tryAgainButton,
-.searchMoreButton {
-  margin-bottom: 50px;
 }
 
 .saveButton {

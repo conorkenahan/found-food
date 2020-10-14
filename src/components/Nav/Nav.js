@@ -2,6 +2,7 @@ import React from "react";
 import Context from "../../Context";
 import { Link } from "react-router-dom";
 import TokenService from "../../services/token-service";
+import IdleService from "../../services/idle-service";
 
 export default class Nav extends React.Component {
   static contextType = Context;
@@ -9,6 +10,8 @@ export default class Nav extends React.Component {
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
     this.context.clearUsername();
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
   };
 
   renderLogoutLink() {

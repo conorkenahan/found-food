@@ -10,7 +10,10 @@ import LoginPage from "./components/Login/LoginPage";
 import Nav from "./components/Nav/Nav.js";
 import RegistrationPage from "./routes/RegistrationPage/RegistrationPage";
 import MyRecipes from "./components/MyRecipes/MyRecipes";
-import RecipeApiService from "./services/recipe-api-service";
+import RecipeApiService from "../src/services/recipe-api-service";
+import TokenService from "../src/services/token-service";
+import AuthApiService from "../src/services/auth-api-service";
+import IdleService from "../src/services/idle-service";
 
 export default class App extends React.Component {
   state = {
@@ -60,7 +63,7 @@ export default class App extends React.Component {
     userRecipes: {},
     loading: false,
 
-    setLoadingToTrue: () => {
+    setLoadingToTrue: (e) => {
       this.setState({ loading: true });
     },
     setLoadingToFalse: () => {
@@ -165,6 +168,30 @@ export default class App extends React.Component {
           this.setState({ error: res.error });
         });
     },
+  };
+
+  componentDidMount() {
+    IdleService.setIdleCallback(this.logoutFromIdle);
+
+    if (TokenService.hasAuthToken()) {
+      IdleService.regiserIdleTimerResets();
+      TokenService.queueCallbackBeforeExpiry(() => {
+        AuthApiService.postRefreshToken();
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    IdleService.unRegisterIdleResets();
+    TokenService.clearCallbackBeforeExpiry();
+  }
+
+  logoutFromIdle = () => {
+    TokenService.clearAuthToken();
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
+
+    this.forceUpdate();
   };
 
   render() {

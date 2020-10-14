@@ -42,7 +42,6 @@ export default class Recipe extends React.Component {
           </>
         )}
 
-        {/* <a href={recipe.url}>Link to Recipe</a> */}
         {recipe.missedIngredients.length ? (
           <>
             <p>You have almost everything for this recipe! All you need is:</p>
@@ -56,7 +55,6 @@ export default class Recipe extends React.Component {
           <p>You have everything you need to make this recipe!</p>
         )}
 
-        {/* below is showing up undefined  */}
         <div className="dietaryIcons">
           {recipeInfo.vegan ? (
             <>

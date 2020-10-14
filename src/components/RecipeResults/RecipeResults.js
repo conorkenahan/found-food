@@ -9,7 +9,6 @@ export default class RecipeResults extends React.Component {
 
   componentDidMount() {
     this.context.getRecipes();
-    this.context.setLoadingToFalse();
   }
   render() {
     return (
@@ -32,7 +31,7 @@ export default class RecipeResults extends React.Component {
               ))}
             </div>
             <Link to={"/"}>
-              <button className="tryAgainButton">Try it again!</button>
+              <button className="searchAgainButton">Search again!</button>
             </Link>
           </section>
         )}
