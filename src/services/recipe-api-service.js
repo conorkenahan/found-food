@@ -10,15 +10,6 @@ const RecipeApiService = {
       },
     }).then((res) => (!res.ok ? Promise.reject(res) : res.json()));
   },
-  // getRecipe(recipeId) {
-  //   return fetch(`${config.API_ENDPOINT}/recipes/${recipeId}`, {
-  //     headers: {
-  //       authorization: `bearer ${TokenService.getAuthToken()}`,
-  //     },
-  //   }).then((res) =>
-  //     !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-  //   );
-  // },
   saveRecipe(recipeId, title, image, url, username) {
     return fetch(`${config.API_ENDPOINT}/recipes`, {
       method: "POST",

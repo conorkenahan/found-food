@@ -1,47 +1,20 @@
 import React from "react";
 import Context from "../../Context";
-import RecipeApiService from "../../services/recipe-api-service";
 import glutenfree from "../../images/icons/glutenfree.png";
 import dairyfree from "../../images/icons/dairyfree.png";
 import vegan from "../../images/icons/vegan.png";
-import star from "../../images/icons/star.png";
+// import star from "../../images/icons/star.png";
 import TokenService from "../../services/token-service";
 
 export default class Recipe extends React.Component {
   static contextType = Context;
-  state = {
-    recipeSaved: false,
-  };
-
-  // need to move into context
-  saveRecipe = (e) => {
-    e.preventDefault();
-    const { recipe } = this.props;
-    const recipeInfo = this.props.recipeInfo[this.props.id];
-    RecipeApiService.saveRecipe(
-      recipe.id,
-      recipe.title,
-      recipe.image,
-      recipeInfo.sourceUrl,
-      this.context.username
-    )
-      .then((res) => {
-        this.setState({ recipeSaved: res });
-        this.setState({
-          userRecipes: [...this.state.userRecipes, recipe],
-        });
-      })
-      .catch((res) => {
-        this.setState({ error: res.error });
-      });
-  };
 
   render() {
     const { recipe } = this.props;
-    const recipeInfo = this.props.recipeInfo[this.props.id];
+    const recipeInfo = this.context.recipeInfo[this.props.id];
 
     return (
-      <div className="recipe" key={this.props.i}>
+      <div className="recipe" key={this.props.id}>
         <a
           href={recipeInfo.sourceUrl}
           target="_blank"
@@ -54,34 +27,20 @@ export default class Recipe extends React.Component {
         <img className="recipeImage" src={recipe.image} alt={recipe.title} />
 
         {TokenService.hasAuthToken() ? (
-          <>
-            {this.state.recipeSaved ? (
-              <>
-                <p>Save recipe:</p>
-                <div className="unsave">
-                  <form
-                    className="saveRecipe"
-                    onSubmit={(e) => this.context.deleteSavedRecipe(recipe, e)}
-                  >
-                    <button>Unsave</button>
-                  </form>
-                  <img
-                    className="savedStar icon"
-                    src={star}
-                    alt="recipe saved"
-                  />
-                </div>
-              </>
-            ) : (
-              <div className="save">
-                <form className="saveRecipe" onSubmit={this.saveRecipe}>
-                  <button>Save</button>
-                </form>
-              </div>
-            )}
-          </>
+          <button
+            className="saveButton"
+            onClick={(e) => {
+              this.context.userRecipes.includes(recipe.id)
+                ? this.context.deleteSavedRecipe(e, recipe)
+                : this.context.saveRecipe(e, recipe, this.props.id);
+            }}
+          >
+            {this.context.userRecipes.includes(recipe.id) ? "Unsave" : "Save"}
+          </button>
         ) : (
-          <></>
+          <>
+            <p>Login to save this recipe!</p>
+          </>
         )}
 
         {/* <a href={recipe.url}>Link to Recipe</a> */}

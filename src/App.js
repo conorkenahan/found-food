@@ -59,15 +59,14 @@ export default class App extends React.Component {
     username: "",
     userRecipes: {},
     loading: true,
-    // recipeSaved: false,
 
     setToLoading: () => {
       this.setState({ loading: true });
     },
 
-    formSubmit: (e) => {
-      e.preventDefault();
-    },
+    // formSubmit: (e) => {
+    //   e.preventDefault();
+    // },
 
     getUsername: (username) => {
       this.setState({ username: username.value });
@@ -85,7 +84,12 @@ export default class App extends React.Component {
 
     newUser: (newUser) => this.setState({ user: newUser }),
 
-    getRecipes: (selectedIngredients) => {
+    getRecipes: () => {
+      const selectedIngredients = this.state.ingredients
+        .filter((i) => i.checked === true)
+        .map((ingredient) => {
+          return ingredient.value + ",+";
+        });
       fetch(
         config.RECIPES_API_ENDPOINT +
           "apiKey=" +
@@ -93,7 +97,7 @@ export default class App extends React.Component {
           "&ingredients=" +
           selectedIngredients +
           "&ranking=2" +
-          "&number=10"
+          "&number=3"
       )
         .then((res) => res.json())
         .then((res) => {
@@ -114,26 +118,14 @@ export default class App extends React.Component {
               })
             );
         });
+      let userRecipes = [];
+      if (this.state.userRecipes.length > 0) {
+        this.state.userRecipes.map((userRecipe) =>
+          userRecipes.push(userRecipe.recipeid)
+        );
+        this.setState({ userRecipes: userRecipes });
+      }
     },
-
-    // need to move saveRecipe to context?
-    // saveRecipe: (recipe, e, id) => {
-    //   e.preventDefault();
-    //   const recipeInfo = this.props.recipeInfo[id];
-    //   RecipeApiService.saveRecipe(
-    //     recipe.id,
-    //     recipe.title,
-    //     recipe.image,
-    //     recipeInfo.sourceUrl,
-    //     this.state.username
-    //   )
-    //     .then((res) => {
-    //       this.setState({ recipeSaved: res });
-    //     })
-    //     .catch((res) => {
-    //       this.setState({ error: res.error });
-    //     });
-    // },
 
     getRecipesByUserId: () => {
       RecipeApiService.getUserRecipes(this.state.username).then((res) =>
@@ -141,17 +133,35 @@ export default class App extends React.Component {
       );
     },
 
-    deleteSavedRecipe: (recipe, e) => {
+    // need to move saveRecipe to context?
+    saveRecipe: (e, recipe, id) => {
       e.preventDefault();
-      RecipeApiService.deleteRecipe(recipe.recipeid, this.state.username)
+      console.log(id);
+      const recipeInfo = this.state.recipeInfo[id];
+      RecipeApiService.saveRecipe(
+        recipe.id,
+        recipe.title,
+        recipe.image,
+        recipeInfo.sourceUrl,
+        this.state.username
+      )
         .then((res) => {
-          this.setState({ recipeSaved: res });
+          this.setState({ recipeSaved: true });
+          this.setState({
+            userRecipes: [...this.state.userRecipes, recipe.id],
+          });
         })
+        .catch((res) => {
+          this.setState({ error: res.error });
+        });
+    },
+
+    deleteSavedRecipe: (e, recipe) => {
+      e.preventDefault();
+      RecipeApiService.deleteRecipe(recipe.id, this.state.username)
         .then(
           this.setState({
-            userRecipes: this.state.userRecipes.filter(
-              (r) => r.id !== recipe.id
-            ),
+            userRecipes: this.state.userRecipes.filter((r) => r !== recipe.id),
           })
         )
         .catch((res) => {

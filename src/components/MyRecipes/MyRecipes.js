@@ -26,7 +26,12 @@ export default class RecipeResults extends React.Component {
         <div>
           <ul>
             {this.context.userRecipes.map((recipe, i) => (
-              <SavedRecipe key={i} id={i} recipe={recipe} {...this.context} />
+              <SavedRecipe
+                key={i}
+                id={recipe.recipeid}
+                recipe={recipe}
+                {...this.context}
+              />
             ))}
           </ul>
         </div>

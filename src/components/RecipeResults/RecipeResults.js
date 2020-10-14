@@ -6,24 +6,9 @@ import TokenService from "../../services/token-service";
 
 export default class RecipeResults extends React.Component {
   static contextType = Context;
-  state = {
-    userRecipesIdCompare: [],
-  };
 
   componentDidMount() {
-    const selectedIngredients = this.context.ingredients
-      .filter((i) => i.checked === true)
-      .map((ingredient) => {
-        return ingredient.value + ",+";
-      });
-    this.context.getRecipes(selectedIngredients);
-    let userRecipes = [];
-    if (this.context.userRecipes.length > 0) {
-      this.context.userRecipes.map((userRecipe) =>
-        userRecipes.push(userRecipe.recipeid)
-      );
-      this.setState({ userRecipesIdCompare: userRecipes });
-    }
+    this.context.getRecipes();
   }
   render() {
     return (
@@ -43,21 +28,18 @@ export default class RecipeResults extends React.Component {
               </p>
             )}
             <div>
-              {this.context.recipes.map((recipe, i) => {
-                if (this.state.userRecipesIdCompare.includes(recipe.id)) {
+              {this.context.recipes.map((recipe, i) => (
+                <Recipe key={i} id={i} recipe={recipe} {...this.context} />
+              ))}
+              {/* {this.context.recipes.map((recipe, i) => {
+                if (this.context.userRecipes.includes(recipe.id)) {
                   return <></>;
                 } else {
                   return (
-                    <Recipe
-                      key={i}
-                      id={i}
-                      recipeInfo={this.context.recipeInfo}
-                      recipe={recipe}
-                      {...this.context}
-                    />
+                    <Recipe key={i} id={i} recipe={recipe} {...this.context} />
                   );
                 }
-              })}
+              })} */}
             </div>
             <Link to={"/"}>
               <button className="tryAgainButton">Try it again!</button>

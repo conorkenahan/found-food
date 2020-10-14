@@ -8,6 +8,7 @@ export default class Login extends Component {
 
   state = { error: null };
 
+  // move to context
   handleSubmitJwtAuth = (e) => {
     e.preventDefault();
     this.setState({ error: null });
@@ -19,8 +20,6 @@ export default class Login extends Component {
       password: password.value,
     })
       .then((res) => {
-        // username.value = "";
-        // password.value = "";
         TokenService.saveAuthToken(res.authToken);
         this.props.onLoginSuccess(username.value);
         this.context.getRecipesByUserId(username.value);

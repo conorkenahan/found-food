@@ -12,7 +12,7 @@ export default class Ingredients extends React.Component {
         <form
           className="ingredientsForm"
           onSubmit={(e) => {
-            this.context.formSubmit(e);
+            e.preventDefault();
             this.props.history.push("/results");
             this.context.setToLoading();
           }}

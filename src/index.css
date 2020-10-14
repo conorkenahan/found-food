@@ -58,7 +58,8 @@ hr {
 .recipe {
   margin-bottom: 30px;
   border-bottom: 2px solid grey;
-  border-width: 80%;
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden {
@@ -92,10 +93,16 @@ hr {
   margin-bottom: 50px;
 }
 
+.saveButton {
+  width: 40px;
+  align-self: center;
+  width: auto;
+  margin-top: 5px;
+}
+
 .recipeImage {
   height: 200px;
   align-self: center;
-  cursor: pointer;
 }
 
 .signupForm,
