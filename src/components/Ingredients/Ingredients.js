@@ -20,22 +20,24 @@ export default class Ingredients extends React.Component {
           <ul className="ingredientsList">
             {this.context.ingredients.map((ingredient, i) => {
               return (
-                <li
-                  key={i}
-                  className={`ingredient__checked_${ingredient.checked} ingredient`}
-                  value={ingredient.value}
-                  onClick={(e) => this.context.toggleChecked(i)}
-                >
-                  {ingredient.label}
-                  <img
-                    className={`ingredientIcon ${ingredient.value.replace(
-                      / /g,
-                      "_"
-                    )}`}
-                    src={require(`../../images/icons/food-icons/${ingredient.value}.png`)}
-                    alt={ingredient.label}
-                  />
-                </li>
+                <div className="ingredientContainer">
+                  <li
+                    key={i}
+                    className={`ingredient__checked_${ingredient.checked} ingredient`}
+                    value={ingredient.value}
+                    onClick={(e) => this.context.toggleChecked(i)}
+                  >
+                    {ingredient.label}
+                    <img
+                      className={`ingredientIcon ${ingredient.value.replace(
+                        / /g,
+                        "_"
+                      )}`}
+                      src={require(`../../images/icons/food-icons/${ingredient.value}.png`)}
+                      alt={ingredient.label}
+                    />
+                  </li>
+                </div>
               );
             })}
           </ul>

@@ -50,22 +50,27 @@ hr {
   margin-top: 40px;
   width: 50%;
 }
-
 .ingredient {
   display: block;
-  padding: 0.8rem;
   border: 3px solid rgb(131, 131, 131);
   border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
-  width: 100px;
-  height: 50px;
+  width: 90%;
+  height: 80%;
   cursor: pointer;
-  margin: 2px;
   text-align: left;
   align-items: center;
   text-align: center;
   justify-content: space-around;
+}
+.ingredientContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100px;
+  height: 100px;
+  margin: auto;
 }
 
 .ingredient__checked_true {
@@ -238,5 +243,27 @@ hr {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    display: flex;
+  }
+
+  .ingredientsList {
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: auto;
+  }
+  .ingredient {
+    margin: 10px;
+    height: 100%;
+  }
+  .ingredientContainer {
+    width: auto;
+    width: 30%;
   }
 }
