@@ -18,28 +18,17 @@ export default class RecipeResults extends React.Component {
             <div className="loader"></div>
           </>
         ) : (
-          <section className="recipeResults">
+          <section>
             <p>Hooray! You can make these recipes!</p>
             {TokenService.hasAuthToken() ? (
               <></>
             ) : (
-              <p className="loginReminder">
-                (P.S... login to save your favorites!)
-              </p>
+              <p className="loginReminder">Login to save your favorites!</p>
             )}
-            <div>
+            <div className="recipeList">
               {this.context.recipes.map((recipe, i) => (
                 <Recipe key={i} id={i} recipe={recipe} {...this.context} />
               ))}
-              {/* {this.context.recipes.map((recipe, i) => {
-                if (this.context.userRecipes.includes(recipe.id)) {
-                  return <></>;
-                } else {
-                  return (
-                    <Recipe key={i} id={i} recipe={recipe} {...this.context} />
-                  );
-                }
-              })} */}
             </div>
             <Link to={"/"}>
               <button className="tryAgainButton">Try it again!</button>

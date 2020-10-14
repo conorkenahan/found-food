@@ -3,7 +3,6 @@ import Context from "../../Context";
 import glutenfree from "../../images/icons/glutenfree.png";
 import dairyfree from "../../images/icons/dairyfree.png";
 import vegan from "../../images/icons/vegan.png";
-// import star from "../../images/icons/star.png";
 import TokenService from "../../services/token-service";
 
 export default class Recipe extends React.Component {
@@ -39,7 +38,7 @@ export default class Recipe extends React.Component {
           </button>
         ) : (
           <>
-            <p>Login to save this recipe!</p>
+            <p className="loginReminder">Login to save this recipe!</p>
           </>
         )}
 

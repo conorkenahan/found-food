@@ -8,7 +8,6 @@ export default class Login extends Component {
 
   state = { error: null };
 
-  // move to context
   handleSubmitJwtAuth = (e) => {
     e.preventDefault();
     this.setState({ error: null });
@@ -47,7 +46,9 @@ export default class Login extends Component {
             id="LoginForm__password"
           ></input>
         </div>
-        <button type="submit">Login</button>
+        <button className="submitLogin" type="submit">
+          Login
+        </button>
       </form>
     );
   }

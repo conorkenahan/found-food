@@ -27,11 +27,13 @@ export default class Nav extends React.Component {
   renderLoginLink() {
     return (
       <div className="auhLink loggedOut">
-        <Link className="authLink" to="/register">
+        <Link className="navLink" to="/register">
           Register
         </Link>
         {" - "}
-        <Link to="/login">Log in</Link>
+        <Link className="navLink" to="/login">
+          Log in
+        </Link>
       </div>
     );
   }
@@ -41,7 +43,9 @@ export default class Nav extends React.Component {
       <>
         <header>
           <h1 className="mainLogo">
-            <Link to="/">Found Food</Link>
+            <Link className="link" to="/">
+              Found Food
+            </Link>
           </h1>
         </header>
         <section className="nav">

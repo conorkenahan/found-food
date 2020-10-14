@@ -64,10 +64,6 @@ export default class App extends React.Component {
       this.setState({ loading: true });
     },
 
-    // formSubmit: (e) => {
-    //   e.preventDefault();
-    // },
-
     getUsername: (username) => {
       this.setState({ username: username.value });
     },
@@ -133,10 +129,8 @@ export default class App extends React.Component {
       );
     },
 
-    // need to move saveRecipe to context?
     saveRecipe: (e, recipe, id) => {
       e.preventDefault();
-      console.log(id);
       const recipeInfo = this.state.recipeInfo[id];
       RecipeApiService.saveRecipe(
         recipe.id,

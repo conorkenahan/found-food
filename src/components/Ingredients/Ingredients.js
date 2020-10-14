@@ -6,7 +6,7 @@ export default class Ingredients extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="ingredients">
         <h3>Have limited ingredients in your kitchen? No problem!</h3>
         <p>Select what you have on hand, and we'll find recipes that match!</p>
         <form
@@ -27,6 +27,14 @@ export default class Ingredients extends React.Component {
                   onClick={(e) => this.context.toggleChecked(i)}
                 >
                   {ingredient.label}
+                  <img
+                    className={`ingredientIcon ${ingredient.value.replace(
+                      / /g,
+                      "_"
+                    )}`}
+                    src={require(`../../images/icons/food-icons/${ingredient.value}.png`)}
+                    alt={ingredient.label}
+                  />
                 </li>
               );
             })}

@@ -1,12 +1,25 @@
+@font-face {
+  font-family: "Ubuntu";
+  src: local("Ubuntu"), url(./fonts/Ubuntu-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Staatliches";
+  src: local("Staatliches-Regular"),
+    url(./fonts/Staatliches-Regular.ttf) format("truetype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: Ubuntu, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: lightblue;
+  background-color: rgb(188, 232, 245);
+}
+
+h2 {
+  font-size: 20px;
 }
 
 code {
@@ -19,32 +32,42 @@ hr {
   width: 80%;
 }
 
+.ingredients {
+  padding-top: 25px;
+}
+
 .ingredientsList {
+  border-top: 3px solid grey;
+  padding-top: 20px;
   display: flex;
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  margin-top: 40px;
+  width: 60%;
 }
 
 .ingredient {
   display: block;
   padding: 0.8rem;
-  border: 2px solid rgb(131, 131, 131);
+  border: 3px solid rgb(131, 131, 131);
   border-radius: 0.4rem;
   display: flex;
+  flex-direction: column;
   width: 100px;
-  height: 30px;
+  height: 50px;
   cursor: pointer;
   margin: 2px;
   text-align: left;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
 }
 
 .ingredient__checked_true {
-  border: 3px solid #4939ff;
+  border: 3px solid blue;
 }
 
-.recipeResultsList,
 .missingIngredientsList {
   width: 400px;
   margin-left: auto;
@@ -53,6 +76,11 @@ hr {
   flex-direction: column;
   list-style-position: inside;
   text-align: left;
+}
+
+.recipeList {
+  padding-top: 30px;
+  border-top: 2px solid grey;
 }
 
 .recipe {
@@ -71,9 +99,18 @@ hr {
   flex-direction: row;
   justify-content: center;
 }
+.link {
+  font-family: Staatliches, "Courier New", Courier, monospace;
+  font-size: 55px;
+  color: #004a7b;
+  font-weight: 200;
+}
 
 .navLink {
+  font-family: Staatliches, "Courier New", Courier, monospace;
   margin: 20px;
+  font-size: 25px;
+  color: #004a7b;
 }
 
 .mainLogo {
@@ -82,10 +119,35 @@ hr {
 
 .submitIngredients,
 .submitSignup,
-.submitLogin {
-  padding: 3px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.submitLogin,
+.tryAgainButton {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #a9a9a9;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.submitIngredients {
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.submitIngredients:hover,
+.submitSignup:hover,
+.submitLogin:hover,
+.tryAgainButton:hover {
+  color: white;
+  background-color: gray;
 }
 
 .tryAgainButton,
@@ -105,12 +167,32 @@ hr {
   align-self: center;
 }
 
+.ingredientIcon {
+  height: 30px;
+  width: auto;
+}
+
+/* specific ingredients CSS */
+.bread,
+.eggs,
+.pork_chops,
+.tortillas {
+  width: 45px;
+  height: 25px;
+}
+.ramen,
+.ground_beef,
+.flour {
+  width: 40px;
+  height: auto;
+}
+
 .signupForm,
 .LoginForm {
   display: flex;
   text-align: left;
   flex-direction: column;
-  width: 200px;
+  width: 150px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -128,8 +210,10 @@ hr {
 }
 
 .recipeTitle {
-  font-size: large;
-  font-style: bold;
+  font-family: Staatliches, "Courier New", Courier, monospace;
+  padding-top: 10px;
+  font-size: 30px;
+  color: #004a7b;
 }
 
 .loader {
