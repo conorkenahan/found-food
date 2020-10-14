@@ -9,6 +9,7 @@ export default class RecipeResults extends React.Component {
 
   componentDidMount() {
     this.context.getRecipes();
+    this.context.setLoadingToFalse();
   }
   render() {
     return (
