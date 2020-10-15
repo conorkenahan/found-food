@@ -14,21 +14,21 @@ Two tables are required- users and saved_recipes.
 
 ### Screenshots
 
+Select the ingredients you have on hand from a list...
 ![Main](./src/images/screenshots/main.png "Main")
 
-Select the ingredients you have on hand from a list...
-
-![Results](./src/images/results.png "Results")
 
 View a list of compatible recipes!
+![Results](./src/images/screenshots/results.png "Results")
 
-![Register](./src/images/register.png "Register")
-![Login](/src/images/login.png "Login")
 
 Register and login to save your favorite recipes.
+![Register](./src/images/screenshots/register.png "Register")
+![Login](/src/images/screenshots/login.png "Login")
+
 
 View your saved recipes when logged in.
-![Saved Recipes](./src/images/saved_recipes.png "Saved Recipes")
+![Saved Recipes](./src/images/screenshots/saved_recipes.png "Saved Recipes")
 
 ### Technology used
 
