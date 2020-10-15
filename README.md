@@ -14,7 +14,7 @@ Two tables are required- users and saved_recipes.
 
 ### Screenshots
 
-![Main](./src/images/main.png "Main")
+![Main](./src/images/screenshots/main.png "Main")
 
 Select the ingredients you have on hand from a list...
 
