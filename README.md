@@ -18,16 +18,16 @@ Select the ingredients you have on hand from a list...
 <img src="./src/images/screenshots/main.png" width="256">
 
 View a list of compatible recipes!
-![Results](./src/images/screenshots/results.png "Results")
+<img src="./src/images/screenshots/results.png" width="256">
 
 
 Register and login to save your favorite recipes.
-![Register](./src/images/screenshots/register.png "Register")
-![Login](/src/images/screenshots/login.png "Login")
+<img src="./src/images/screenshots/register.png" width="256">
+<img src="./src/images/screenshots/login.png" width="256">
 
 
 View your saved recipes when logged in.
-![Saved Recipes](./src/images/screenshots/saved_recipes.png "Saved Recipes")
+<img src="./src/images/screenshots/saved_recipes.png" width="256">
 
 ### Technology used
 
