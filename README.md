@@ -2,7 +2,13 @@
 
 ## A recipe search app
 
+Description:
+
 Search for recipes based off of food you already have in your kitchen!
+
+Login with test user to view saved recipes:
+- Username: testuser
+- Password: Testing123!
 
 https://found-food.conorkenahan.vercel.app/
 
