@@ -15,7 +15,8 @@ https://found-food.conorkenahan.vercel.app/
 
 ### API Documentation
 
-https://github.com/conorkenahan/found-food-api
+Github Repo: https://github.com/conorkenahan/found-food-api
+Endpoint: https://fierce-gorge-10947.herokuapp.com/api
 
 Two tables are required- users and saved_recipes.
 
