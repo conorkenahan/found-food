@@ -15,7 +15,7 @@ Two tables are required- users and saved_recipes.
 ### Screenshots
 
 Select the ingredients you have on hand from a list...
-![Main](./src/images/screenshots/main.png "Main" width=50)
+<img src="./src/images/screenshots/main.png" alt="Main" width="50")
 
 
 View a list of compatible recipes!
