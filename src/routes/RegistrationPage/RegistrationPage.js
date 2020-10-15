@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import SignUp from "../../components/SignUp/SignUp";
 
 export default class RegistrationPage extends Component {
-  // static defaultProps = {
-  //   history: {
-  //     push: () => {},
-  //   },
-  // };
-
   handleRegistrationSuccess = (user) => {
     const { history } = this.props;
     history.push("/login");

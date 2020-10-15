@@ -63,6 +63,7 @@ export default class App extends React.Component {
     userRecipes: {},
     loading: false,
 
+    // handles loading icon
     setLoadingToTrue: (e) => {
       this.setState({ loading: true });
     },
@@ -70,22 +71,22 @@ export default class App extends React.Component {
       this.setState({ loading: false });
     },
 
+    // handles storing of username
     getUsername: (username) => {
       this.setState({ username: username.value });
     },
-
     clearUsername: () => {
       this.setState({ username: "" });
     },
 
+    //toggle checking of ingredients on home screen
     toggleChecked: (index) => {
       let ingredients = this.state.ingredients;
       ingredients[index].checked = !ingredients[index].checked;
       this.setState({ ingredients });
     },
 
-    newUser: (newUser) => this.setState({ user: newUser }),
-
+    // recipe fetch
     getRecipes: () => {
       const selectedIngredients = this.state.ingredients
         .filter((i) => i.checked === true)
@@ -135,6 +136,7 @@ export default class App extends React.Component {
       );
     },
 
+    // saves recipe to database
     saveRecipe: (e, recipe, id) => {
       e.preventDefault();
       const recipeInfo = this.state.recipeInfo[id];
@@ -156,6 +158,7 @@ export default class App extends React.Component {
         });
     },
 
+    // removes recipe from database
     deleteSavedRecipe: (e, recipe) => {
       e.preventDefault();
       RecipeApiService.deleteRecipe(recipe.id, this.state.username)
