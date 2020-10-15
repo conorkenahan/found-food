@@ -11,7 +11,7 @@ Login with test user to view saved recipes:
 - Username: testuser
 - Password: Testing123!
 
-https://found-food.conorkenahan.vercel.app/
+https://found-food.vercel.app/
 
 ### API Documentation
 

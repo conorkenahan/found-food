@@ -8,6 +8,10 @@
     url(./fonts/Staatliches-Regular.ttf) format("truetype");
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Ubuntu, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
