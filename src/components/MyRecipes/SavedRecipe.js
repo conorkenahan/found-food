@@ -8,7 +8,7 @@ export default class Recipe extends React.Component {
     const { recipe } = this.props;
 
     return (
-      <div className="recipe" key={this.props.i}>
+      <div className="savedRecipe" key={this.props.i}>
         <a href={recipe.url} className="recipeTitle">
           {recipe.title}
         </a>

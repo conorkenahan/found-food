@@ -99,7 +99,7 @@ export default class App extends React.Component {
           "&ingredients=" +
           selectedIngredients +
           "&ranking=2" +
-          "&number=3"
+          "&number=10"
       )
         .then((res) => res.json())
         .then((res) => {

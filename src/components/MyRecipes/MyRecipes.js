@@ -14,17 +14,17 @@ export default class RecipeResults extends React.Component {
   render() {
     return (
       <section className="myRecipes">
-        <p>Your Saved Recipes:</p>
         <Link to={"/"}>
           <button className="searchMoreButton">Back To Search</button>
         </Link>
+        <p>Your Saved Recipes:</p>
         {TokenService.hasAuthToken() ? (
           <></>
         ) : (
           <p className="loginReminder">Oops, you're not logged in!</p>
         )}
         <div>
-          <ul>
+          <ul className="savedRecipes">
             {this.context.userRecipes.map((recipe, i) => (
               <SavedRecipe
                 key={i}
