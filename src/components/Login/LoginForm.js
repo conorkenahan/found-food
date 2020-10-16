@@ -64,11 +64,13 @@ export default class Login extends Component {
             </form>
             <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
               <input
+                readOnly
                 className="hidden"
                 name="username"
                 value="testuser"
               ></input>
               <input
+                readOnly
                 className="hidden"
                 name="password"
                 value="Testing123!"

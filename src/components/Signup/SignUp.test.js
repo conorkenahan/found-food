@@ -1,9 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import LoginPage from "./LoginPage";
+import SignUp from "./SignUp";
+import { BrowserRouter } from "react-router-dom";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<LoginPage />, div);
+  ReactDOM.render(
+    <BrowserRouter>
+      <SignUp />
+    </BrowserRouter>,
+    div
+  );
   ReactDOM.unmountComponentAtNode(div);
 });
