@@ -38,25 +38,46 @@ export default class Login extends Component {
             <div className="loader"></div>
           </>
         ) : (
-          <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
-            <div role="alert">{error && <p className="red">{error}</p>}</div>
-            <div className="username">
-              <label htmlFor="LoginForm__username">User name</label>
-              <input required name="username" id="LoginForm__username"></input>
-            </div>
-            <div className="password">
-              <label htmlFor="LoginForm__password">Password</label>
+          <>
+            <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
+              <div role="alert">{error && <p className="red">{error}</p>}</div>
+              <div className="username">
+                <label htmlFor="LoginForm__username">User name</label>
+                <input
+                  required
+                  name="username"
+                  id="LoginForm__username"
+                ></input>
+              </div>
+              <div className="password">
+                <label htmlFor="LoginForm__password">Password</label>
+                <input
+                  required
+                  name="password"
+                  type="password"
+                  id="LoginForm__password"
+                ></input>
+              </div>
+              <button className="submitLogin" type="submit">
+                Login
+              </button>
+            </form>
+            <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
               <input
-                required
-                name="password"
-                type="password"
-                id="LoginForm__password"
+                className="hidden"
+                name="username"
+                value="testuser"
               ></input>
-            </div>
-            <button className="submitLogin" type="submit">
-              Login
-            </button>
-          </form>
+              <input
+                className="hidden"
+                name="password"
+                value="Testing123!"
+              ></input>
+              <button className="submitLogin" type="submit">
+                login as demo user here
+              </button>
+            </form>
+          </>
         )}
       </>
     );

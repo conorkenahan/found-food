@@ -11,14 +11,25 @@ export default class Ingredients extends React.Component {
   render() {
     return (
       <div className="ingredients">
-        <h3>Have limited ingredients in your kitchen? No problem!</h3>
+        <h3>Have limited ingredients in your kitchen?</h3>
+        <h3> No problem!</h3>
         <p>Select what you have on hand, and we'll find recipes that match!</p>
         <form
           className="ingredientsForm"
           onSubmit={(e) => {
-            e.preventDefault();
-            this.props.history.push("/results");
-            this.context.setLoadingToTrue();
+            const checkedIngredients = [];
+            this.context.ingredients.forEach((ingredient) => {
+              if (ingredient.checked === true) {
+                checkedIngredients.push(ingredient);
+              }
+            });
+            if (checkedIngredients.length >= 2) {
+              e.preventDefault();
+              this.props.history.push("/results");
+              this.context.setLoadingToTrue();
+            } else {
+              alert("You must select at least two ingredients.");
+            }
           }}
         >
           <ul className="ingredientsList">
