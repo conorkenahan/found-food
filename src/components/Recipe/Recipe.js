@@ -25,7 +25,7 @@ export default class Recipe extends React.Component {
         <p>{recipe.description}</p>
         <img className="recipeImage" src={recipe.image} alt={recipe.title} />
 
-        {TokenService.hasAuthToken() ? (
+        {TokenService.hasAuthToken() && this.context.userRecipes > 0 ? (
           <button
             className="saveButton"
             onClick={(e) => {
@@ -36,6 +36,8 @@ export default class Recipe extends React.Component {
           >
             {this.context.userRecipes.includes(recipe.id) ? "Unsave" : "Save"}
           </button>
+        ) : TokenService.hasAuthToken() ? (
+          <></>
         ) : (
           <>
             <p className="loginReminder">Login to save this recipe!</p>

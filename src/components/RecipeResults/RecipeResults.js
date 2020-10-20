@@ -7,9 +7,6 @@ import TokenService from "../../services/token-service";
 export default class RecipeResults extends React.Component {
   static contextType = Context;
 
-  componentDidMount() {
-    this.context.getRecipes();
-  }
   render() {
     return (
       <>

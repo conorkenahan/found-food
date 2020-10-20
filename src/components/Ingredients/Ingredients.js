@@ -25,6 +25,7 @@ export default class Ingredients extends React.Component {
             });
             if (checkedIngredients.length >= 2) {
               e.preventDefault();
+              this.context.getRecipes();
               this.props.history.push("/results");
               this.context.setLoadingToTrue();
             } else {

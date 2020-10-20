@@ -19,22 +19,27 @@ export default class RecipeResults extends React.Component {
         </Link>
         <p>Your Saved Recipes:</p>
         {TokenService.hasAuthToken() ? (
-          <></>
+          <>
+            {this.context.userRecipes < 0 ? (
+              <p>Your saved recipes will show here!</p>
+            ) : (
+              <div>
+                <ul className="savedRecipes">
+                  {this.context.userRecipes.map((recipe, i) => (
+                    <SavedRecipe
+                      key={i}
+                      id={recipe.recipeid}
+                      recipe={recipe}
+                      {...this.context}
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+          </>
         ) : (
           <p className="loginReminder">Oops, you're not logged in!</p>
         )}
-        <div>
-          <ul className="savedRecipes">
-            {this.context.userRecipes.map((recipe, i) => (
-              <SavedRecipe
-                key={i}
-                id={recipe.recipeid}
-                recipe={recipe}
-                {...this.context}
-              />
-            ))}
-          </ul>
-        </div>
       </section>
     );
   }
