@@ -10,7 +10,9 @@ export default class Recipe extends React.Component {
 
   render() {
     const { recipe } = this.props;
-    const recipeInfo = this.context.recipeInfo[this.props.id];
+    const recipeInfo = this.context
+      ? this.context.recipeInfo[this.props.id]
+      : {};
 
     return (
       <div className="recipe" key={this.props.id}>

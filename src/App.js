@@ -177,6 +177,22 @@ export default class App extends React.Component {
     IdleService.setIdleCallback(this.logoutFromIdle);
 
     if (TokenService.hasAuthToken()) {
+      AuthApiService.getUsername().then((res) => {
+        const username = res;
+        return RecipeApiService.getUserRecipes(username).then((res) => {
+          const userRecipes = res;
+          this.setState({
+            username: username,
+            userRecipes: userRecipes,
+          });
+        });
+      });
+      // .then(
+      //   console.log(this.state.username)
+      //   // return RecipeApiService.getUserRecipes(this.state.username).then((res) =>
+      //   //   this.setState({ userRecipes: res })
+      //   // )
+      // );
       IdleService.regiserIdleTimerResets();
       TokenService.queueCallbackBeforeExpiry(() => {
         AuthApiService.postRefreshToken();

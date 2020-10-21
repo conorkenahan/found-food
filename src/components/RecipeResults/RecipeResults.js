@@ -8,9 +8,11 @@ export default class RecipeResults extends React.Component {
   static contextType = Context;
 
   render() {
+    const { loading = false } = this.context || false;
+    const { recipes = [] } = this.context || [];
     return (
       <>
-        {this.context.loading ? (
+        {loading ? (
           <>
             <div className="loader"></div>
           </>
@@ -23,7 +25,7 @@ export default class RecipeResults extends React.Component {
               <p className="loginReminder">Login to save your favorites!</p>
             )}
             <div className="recipeList">
-              {this.context.recipes.map((recipe, i) => (
+              {recipes.map((recipe, i) => (
                 <Recipe key={i} id={i} recipe={recipe} {...this.context} />
               ))}
             </div>

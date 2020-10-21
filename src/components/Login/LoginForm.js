@@ -31,9 +31,10 @@ export default class Login extends Component {
 
   render() {
     const { error } = this.state;
+    const { loading = false } = this.context || false;
     return (
       <>
-        {this.context.loading ? (
+        {loading ? (
           <>
             <div className="loader"></div>
           </>

@@ -57,6 +57,24 @@ const AuthApiService = {
         console.error(err);
       });
   },
+  getUsername() {
+    return fetch(`${config.API_ENDPOINT}/users/username`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      )
+      .then((res) => {
+        return res.username;
+      })
+      .catch((err) => {
+        console.log("get username error");
+        console.error(err);
+      });
+  },
 };
 
 export default AuthApiService;

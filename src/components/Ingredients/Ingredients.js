@@ -5,10 +5,11 @@ export default class Ingredients extends React.Component {
   static contextType = Context;
 
   componentDidMount() {
-    this.context.setLoadingToFalse();
+    this.context && this.context.setLoadingToFalse();
   }
 
   render() {
+    const { ingredients = [] } = this.context || [];
     return (
       <div className="ingredients">
         <h3>Have limited ingredients in your kitchen?</h3>
@@ -18,7 +19,7 @@ export default class Ingredients extends React.Component {
           className="ingredientsForm"
           onSubmit={(e) => {
             const checkedIngredients = [];
-            this.context.ingredients.forEach((ingredient) => {
+            ingredients.forEach((ingredient) => {
               if (ingredient.checked === true) {
                 checkedIngredients.push(ingredient);
               }
@@ -34,7 +35,7 @@ export default class Ingredients extends React.Component {
           }}
         >
           <ul className="ingredientsList">
-            {this.context.ingredients.map((ingredient, i) => {
+            {ingredients.map((ingredient, i) => {
               return (
                 <div key={i} className="ingredientContainer">
                   <li
