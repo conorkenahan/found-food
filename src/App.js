@@ -187,7 +187,6 @@ export default class App extends React.Component {
       AuthApiService.getUsername().then((res) => {
         const username = res;
         return RecipeApiService.getUserRecipes(username).then((res) => {
-          console.log(res);
           const userRecipeIds = [];
           res.map((recipe) => {
             return userRecipeIds.push(recipe.recipeid);
