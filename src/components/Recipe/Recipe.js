@@ -13,7 +13,7 @@ export default class Recipe extends React.Component {
     const recipeInfo = this.context
       ? this.context.recipeInfo[this.props.id]
       : {};
-    const { userRecipes = [] } = this.context || [];
+    const { userRecipeIds = [] } = this.context || [];
 
     return (
       <div className="recipe" key={this.props.id}>
@@ -32,12 +32,12 @@ export default class Recipe extends React.Component {
           <button
             className="saveButton"
             onClick={(e) => {
-              userRecipes.includes(recipe.id)
+              userRecipeIds.includes(recipe.id)
                 ? this.context.deleteSavedRecipe(e, recipe)
                 : this.context.saveRecipe(e, recipe, this.props.id);
             }}
           >
-            {userRecipes.includes(recipe.id) ? "Unsave" : "Save"}
+            {userRecipeIds.includes(recipe.id) ? "Unsave" : "Save"}
           </button>
         ) : TokenService.hasAuthToken() ? (
           <></>

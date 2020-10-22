@@ -62,6 +62,7 @@ export default class App extends React.Component {
     username: "",
     userRecipes: {},
     loading: false,
+    userRecipeIds: [],
 
     // handles loading icon
     setLoadingToTrue: (e) => {
@@ -121,12 +122,12 @@ export default class App extends React.Component {
               })
             );
         });
-      let userRecipes = [];
+      let userRecipeIds = [];
       if (this.state.userRecipes.length > 0) {
         this.state.userRecipes.map((userRecipe) =>
-          userRecipes.push(userRecipe.recipeid)
+          userRecipeIds.push(userRecipe.recipeid)
         );
-        this.setState({ userRecipes: userRecipes });
+        this.setState({ userRecipeIds: userRecipeIds });
       }
     },
 
@@ -150,7 +151,8 @@ export default class App extends React.Component {
         .then((res) => {
           this.setState({ recipeSaved: true });
           this.setState({
-            userRecipes: [...this.state.userRecipes, recipe.id],
+            userRecipes: [...this.state.userRecipes, recipe],
+            userRecipeIds: [...this.state.userRecipeIds, recipe.id],
           });
         })
         .catch((res) => {
@@ -159,11 +161,17 @@ export default class App extends React.Component {
     },
 
     // removes recipe from database
-    deleteSavedRecipe: (recipe) => {
+    deleteSavedRecipe: (e, recipe) => {
+      e.preventDefault();
       RecipeApiService.deleteRecipe(recipe.id, this.state.username)
         .then(
           this.setState({
-            userRecipes: this.state.userRecipes.filter((r) => r !== recipe.id),
+            userRecipeIds: this.state.userRecipeIds.filter(
+              (r) => r !== recipe.id
+            ),
+            userRecipes: this.state.userRecipes.filter(
+              (r) => r.id !== recipe.id
+            ),
           })
         )
         .catch((res) => {
@@ -179,10 +187,16 @@ export default class App extends React.Component {
       AuthApiService.getUsername().then((res) => {
         const username = res;
         return RecipeApiService.getUserRecipes(username).then((res) => {
+          console.log(res);
+          const userRecipeIds = [];
+          res.map((recipe) => {
+            return userRecipeIds.push(recipe.recipeid);
+          });
           const userRecipes = res;
           this.setState({
             username: username,
             userRecipes: userRecipes,
+            userRecipeIds: userRecipeIds,
           });
         });
       });
