@@ -159,8 +159,7 @@ export default class App extends React.Component {
     },
 
     // removes recipe from database
-    deleteSavedRecipe: (e, recipe) => {
-      e.preventDefault();
+    deleteSavedRecipe: (recipe) => {
       RecipeApiService.deleteRecipe(recipe.id, this.state.username)
         .then(
           this.setState({
@@ -187,12 +186,6 @@ export default class App extends React.Component {
           });
         });
       });
-      // .then(
-      //   console.log(this.state.username)
-      //   // return RecipeApiService.getUserRecipes(this.state.username).then((res) =>
-      //   //   this.setState({ userRecipes: res })
-      //   // )
-      // );
       IdleService.regiserIdleTimerResets();
       TokenService.queueCallbackBeforeExpiry(() => {
         AuthApiService.postRefreshToken();

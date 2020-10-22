@@ -17,8 +17,8 @@ export default class Recipe extends React.Component {
 
         <div className="unsave">
           <form
-            className="saveRecipe"
-            onSubmit={(e) => this.context.deleteSavedRecipe(recipe, e)}
+            className="unsaveRecipe"
+            onSubmit={() => this.context.deleteSavedRecipe(recipe)}
           >
             <button className="unsaveButton">Unsave</button>
           </form>

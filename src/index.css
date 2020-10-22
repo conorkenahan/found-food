@@ -96,6 +96,8 @@ hr {
 }
 
 .recipe {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 30px;
   border-bottom: 2px solid grey;
   margin-left: auto;
