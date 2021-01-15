@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Ubuntu";
-  src: local("Ubuntu"), url(./fonts/Ubuntu-Regular.ttf) format("truetype");
+  font-family: "Bau";
+  src: local("Bau"), url(./fonts/Bau-Regular.ttf) format("truetype");
 }
 @font-face {
   font-family: "Staatliches";
@@ -14,12 +14,12 @@
 
 body {
   margin: 0;
-  font-family: Ubuntu, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  font-family: Bau, "Segoe UI", "Roboto", "Oxygen", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: rgb(188, 232, 245);
+  background-color: #f5f1e9;
 }
 
 h2 {
@@ -34,10 +34,6 @@ code {
 hr {
   border: 1px solid gray;
   width: 80%;
-}
-
-.ingredients {
-  padding-top: 25px;
 }
 
 .ingredientsList {
@@ -117,25 +113,29 @@ hr {
 .nav {
   display: flex;
   flex-direction: row;
+  margin: 30px;
   justify-content: center;
+  margin: auto 0 auto auto;
 }
+
+
 .link {
   font-family: Staatliches, "Courier New", Courier, monospace;
   font-size: 55px;
-  color: #004a7b;
+  color: #282725;
   font-weight: 200;
 }
 
-.navLink,
-.authLink {
+.navLink {
   font-family: Staatliches, "Courier New", Courier, monospace;
-  margin: 20px;
+  margin: auto;
   font-size: 20px;
-  color: #004a7b;
+  color: #282725;
 }
 
 .mainLogo {
   text-align: center;
+  text-decoration: none;
 }
 
 /* buttons */
@@ -244,7 +244,7 @@ hr {
   font-family: Staatliches, "Courier New", Courier, monospace;
   padding-top: 10px;
   font-size: 30px;
-  color: #004a7b;
+  color: #282725;
 }
 
 .loader {
@@ -267,6 +267,9 @@ hr {
     transform: rotate(360deg);
   }
 }
+
+
+/* ---------- MOBILE ----------  */
 
 @media only screen and (max-width: 600px) {
   body {

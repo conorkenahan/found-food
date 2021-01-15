@@ -16,12 +16,18 @@ export default class Nav extends React.Component {
 
   renderLogoutLink() {
     return (
-      <div className=" loggedIn">
-        <Link className="authLink" to={`/recipes/${this.context.username}`}>
+      <div className="nav loggedIn">
+        <Link className="navlink" to={`/recipes/${this.context.username}`}>
           My Recipes
         </Link>
-        {" - "}
-        <Link className="authLink" onClick={this.handleLogoutClick} to="/">
+        <header>
+          <h1>
+            <Link className="link mainLogo" to="/">
+              Found Food
+            </Link>
+          </h1>
+        </header>
+        <Link className="navlink" onClick={this.handleLogoutClick} to="/">
           Logout
         </Link>
       </div>
@@ -29,11 +35,17 @@ export default class Nav extends React.Component {
   }
   renderLoginLink() {
     return (
-      <div className="auhLink loggedOut">
+      <div className="nav loggedOut">
         <Link className="navLink" to="/register">
           Register
         </Link>
-        {" - "}
+        <header>
+          <h1>
+            <Link className="link mainLogo" to="/">
+              Found Food
+            </Link>
+          </h1>
+        </header>
         <Link className="navLink" to="/login">
           Log in
         </Link>
@@ -43,20 +55,13 @@ export default class Nav extends React.Component {
 
   render() {
     return (
-      <>
-        <header>
-          <h1 className="mainLogo">
-            <Link className="link" to="/">
-              Found Food
-            </Link>
-          </h1>
-        </header>
-        <section className="nav">
+      <div>
+        <section>
           {TokenService.hasAuthToken()
             ? this.renderLogoutLink()
             : this.renderLoginLink()}
         </section>
-      </>
+      </div>
     );
   }
 }
