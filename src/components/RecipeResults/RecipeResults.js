@@ -18,7 +18,6 @@ export default class RecipeResults extends React.Component {
           </>
         ) : (
           <section>
-            <p>Hooray! You can make these recipes!</p>
             {TokenService.hasAuthToken() ? (
               <></>
             ) : (

@@ -16,40 +16,86 @@ export default class Nav extends React.Component {
 
   renderLogoutLink() {
     return (
-      <div className="nav loggedIn">
-        <Link className="navlink" to={`/recipes/${this.context.username}`}>
-          My Recipes
-        </Link>
-        <header>
-          <h1>
-            <Link className="link mainLogo" to="/">
-              Found Food
+      <>
+        <div className="hideWeb">
+          <div className="nav loggedIn">
+            <Link className="navLink" to={`/recipes/${this.context.username}`}>
+              My Recipes
             </Link>
-          </h1>
-        </header>
-        <Link className="navlink" onClick={this.handleLogoutClick} to="/">
-          Logout
-        </Link>
-      </div>
+            <header>
+              <h1>
+                <Link className="link mainLogo" to="/">
+                  Found Food
+                </Link>
+              </h1>
+            </header>
+            <Link className="navLink" onClick={this.handleLogoutClick} to="/">
+              Logout
+            </Link>
+          </div>
+        </div>
+        <div className="hideMobile">
+          <div className="nav loggedIn">
+            <header>
+              <h1>
+                <Link className="link mainLogo" to="/">
+                  Found Food
+                </Link>
+              </h1>
+            </header>
+            <div className="mobileNavLinks">
+              <Link className="navLink" to={`/recipes/${this.context.username}`}>
+                My Recipes
+              </Link>
+              <Link className="navLink" onClick={this.handleLogoutClick} to="/">
+                Logout
+              </Link>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
   renderLoginLink() {
     return (
-      <div className="nav loggedOut">
-        <Link className="navLink" to="/register">
-          Register
-        </Link>
-        <header>
-          <h1>
-            <Link className="link mainLogo" to="/">
-              Found Food
+      <>
+        <div className="hideWeb">
+          <div className="nav loggedOut">
+            <Link className="navLink" to="/register">
+              Register
             </Link>
-          </h1>
-        </header>
-        <Link className="navLink" to="/login">
-          Log in
-        </Link>
-      </div>
+            <header>
+              <h1>
+                <Link className="link mainLogo" to="/">
+                  Found Food
+                </Link>
+              </h1>
+            </header>
+            <Link className="navLink" to="/login">
+              Log in
+            </Link>
+          </div>
+        </div>
+        <div className="hideMobile">
+          <div className="nav loggedOut">
+            <header>
+              <h1>
+                <Link className="link mainLogo" to="/">
+                  Found Food
+                </Link>
+              </h1>
+            </header>
+            <div className="mobileNavLinks">
+              <Link className="navLink" to="/register">
+                Register
+              </Link>
+              <Link className="navLink" to="/login">
+                Log in
+              </Link>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 

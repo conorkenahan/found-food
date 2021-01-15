@@ -22,6 +22,7 @@ body {
   background-color: #f5f1e9;
 }
 
+
 h2 {
   font-size: 20px;
 }
@@ -268,27 +269,55 @@ hr {
   }
 }
 
+@media only screen and (min-width: 768px){
+   .hideMobile{
+    display: none;
+  }
+}
+
+
 
 /* ---------- MOBILE ----------  */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
   body {
     display: flex;
     flex-direction: column;
   }
+  .hideWeb{
+    display: none;
+  }
+
+  .nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+ .mobileNavLinks{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navLink{
+    padding: 15px;
+  }
+  
 
   .ingredientsList {
     display: flex;
+    align-items: center;    
     flex-wrap: wrap;
-    width: auto;
+    width: 100%;
   }
 
   .ingredient {
+    display: flex;
+    justify-content: center;
     height: 100%;
-    margin-bottom: 5px;
+    margin: 5px;;
   }
   .ingredientContainer {
-    width: auto;
     width: 30%;
   }
 }
